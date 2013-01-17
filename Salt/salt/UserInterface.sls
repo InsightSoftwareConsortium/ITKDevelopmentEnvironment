@@ -1,5 +1,7 @@
 console-keymaps:
   pkg.installed
+emacs:
+  pkg.installed
 lxde:
   pkg.installed
 tmux:

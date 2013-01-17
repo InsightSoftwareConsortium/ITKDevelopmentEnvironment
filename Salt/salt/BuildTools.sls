@@ -1,3 +1,4 @@
 gcc:
-  pkg:
-    - installed
+  pkg.installed
+g++:
+  pkg.installed
