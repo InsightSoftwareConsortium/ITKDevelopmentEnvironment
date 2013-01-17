@@ -4,7 +4,7 @@ Vagrant::Config.run do |config|
 
   ## For masterless, mount your salt file root
   salt_file_root = File.expand_path(File.join(File.dirname(__FILE__), '..', 'Salt'))
-  config.vm.share_folder "salt_file_root", "/mnt/salt", salt_file_root 
+  config.vm.share_folder "salt_file_root", "/srv", salt_file_root 
 
 
   ## Use all the defaults:

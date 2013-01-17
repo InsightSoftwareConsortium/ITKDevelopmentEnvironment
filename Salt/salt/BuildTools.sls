@@ -1,0 +1,3 @@
+gcc:
+  pkg:
+    - installed
