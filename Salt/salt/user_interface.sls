@@ -4,6 +4,8 @@ user_packages:
     - names:
       - console-keymaps
       - emacs
+      - gitk
       - lxde
+      - tig
       - tmux
       - vim-gtk
