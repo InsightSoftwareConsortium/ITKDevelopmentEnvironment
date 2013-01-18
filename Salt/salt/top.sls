@@ -1,4 +1,4 @@
 base:
   '*':
-    - BuildTools
-    - UserInterface
+    - build_tools
+    - user_interface
