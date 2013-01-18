@@ -1,5 +1,6 @@
 base:
   '*':
     - build_tools
-    - users
+    - cmake
     - user_interface
+    - users

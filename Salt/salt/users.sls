@@ -1,8 +1,4 @@
 ### Users
-vagrant:
-  user.absent:
-    - force: True
-
 # password is "itk"
 root:
   user.present:
@@ -24,7 +20,6 @@ itk:
       - video
       - plugdev
       - admin
-      - powerdev
 
 ### Directory layout
 src_and_bin_dirs:
@@ -36,4 +31,3 @@ src_and_bin_dirs:
     - group: itk
     - require:
       - user: itk
-      
