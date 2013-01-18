@@ -4,3 +4,4 @@ base:
     - cmake
     - user_interface
     - users
+    - vtk
