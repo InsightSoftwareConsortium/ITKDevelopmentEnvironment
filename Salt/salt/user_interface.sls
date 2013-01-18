@@ -1,14 +1,12 @@
 ### Packages
-console-keymaps:
-  pkg.installed
-emacs:
-  pkg.installed
-lxde:
-  pkg.installed
-tmux:
-  pkg.installed
-vim-gtk:
-  pkg.installed
+user_packages:
+  pkg.installed:
+    - names:
+      - console-keymaps
+      - emacs
+      - lxde
+      - tmux
+      - vim-gtk
 
 ### Users
 vagrant:

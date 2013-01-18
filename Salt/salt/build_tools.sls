@@ -1,4 +1,5 @@
-gcc:
-  pkg.installed
-g++:
-  pkg.installed
+build_packages:
+  pkg.installed:
+    - names:
+      - g++
+      - gcc
