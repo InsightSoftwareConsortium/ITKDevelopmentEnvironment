@@ -2,6 +2,7 @@ base:
   '*':
     - build_tools
     - cmake
+    - fiji
     - ipython
     - itk
     - simpleitk
