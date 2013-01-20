@@ -1,3 +1,6 @@
+include:
+  - users
+
 Fiji_install:
   pkg.installed:
     - names:
@@ -10,3 +13,12 @@ Fiji_install:
     - cwd: /opt
     - shell: /bin/bash
     - stateful: True
+
+  file.managed:
+   - name: /home/itk/.bashrc
+   - source: salt://.bashrc
+   - user: itk
+   - group: itk
+   - require:
+     - user: itk
+
