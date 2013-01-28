@@ -99,6 +99,5 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # For Fiji instead of ImageJ
-export SITK_SHOW_COMMAND='%a %f'
-export SITK_SHOW_COLOR_COMMAND="${SITK_SHOW_COMMAND}"
-export SITK_SHOW_3D_COMMAND="${SITK_SHOW_COMMAND}"
+export SITK_SHOW_COMMAND="%a -eval 'open(\"%f\"); rename(\"%t\"); '"
+export SITK_SHOW_COLOR_COMMAND="%a -eval 'open(\"%f\"); run(\"Make Composite\", \"display=Composite\"); rename(\"%t\"); '"
