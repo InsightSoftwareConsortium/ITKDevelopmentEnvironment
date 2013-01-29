@@ -26,6 +26,5 @@ IPython_pip_packages:
 
 ipython:
   pip.installed:
-    - install_options: zmq
     - require:
       - pip: IPython_pip_packages
