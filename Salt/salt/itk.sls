@@ -2,6 +2,7 @@ include:
   - build_tools
   - users
   - cmake
+  - vtk
 
 ITK_build:
   git.latest:
@@ -31,6 +32,7 @@ ITK_build:
     - require:
       - file: /home/itk/bin/ITK
       - cmd: CMake_install
+      - cmd: VTK_install
 
 ITK_install:
   cmd.wait:
