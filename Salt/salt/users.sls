@@ -5,6 +5,10 @@ root:
     - password: $6$bM8wW6dF$MHQwHyIakSEQ0UEvkGEauRHYY/l37zEwcfP8MDycrw5IBGs6Ux7GUL6PmnzvLMnphYO7KB0Yp7TafZ1vjtO6Y/
     - enfore_password: True
 
+powerdev_group:
+  group.present:
+    - name: powerdev
+
 itk:
   user.present:
     - name: itk
@@ -20,6 +24,12 @@ itk:
       - video
       - plugdev
       - admin
+    # Required for the user to be able to shutdown from the GUI.  Only used with
+    # older hal.
+    - optional_groups:
+      - powerdev
+    - require:
+      - group: powerdev_group
 
 ### Directory layout
 src_and_bin_dirs:
