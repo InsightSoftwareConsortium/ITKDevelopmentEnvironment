@@ -15,10 +15,10 @@ Fiji_install:
     - stateful: True
 
   file.managed:
-   - name: /home/itk/.bashrc
-   - source: salt://.bashrc
-   - user: itk
-   - group: itk
-   - require:
-     - user: itk
+    - name: /home/itk/.bashrc
+    - source: salt://.bashrc
+    - user: itk
+    - group: itk
+    - require:
+      - user: itk
 
