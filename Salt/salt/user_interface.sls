@@ -1,3 +1,6 @@
+include:
+  - users
+
 ### Packages
 user_packages:
   pkg.installed:
@@ -21,7 +24,7 @@ user_packages:
     - mode: 644
     - makedirs: True
     - require:
-      - user: user_packages
+      - user: itk
 
 /home/itk/.config/pcmanfm/LXDE.conf:
   file.managed:
@@ -31,5 +34,5 @@ user_packages:
     - mode: 644
     - makedirs: True
     - require:
-      - user: user_packages
+      - user: itk
 
