@@ -23,7 +23,6 @@ itk:
       - dip
       - video
       - plugdev
-      - admin
     # Required for the user to be able to shutdown from the GUI.  Only used with
     # older hal.
     - optional_groups:
