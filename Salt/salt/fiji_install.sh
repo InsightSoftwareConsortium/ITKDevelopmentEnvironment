@@ -6,12 +6,14 @@ die() {
   exit 1
 }
 
-echo "downloading fiji..."
-fiji_tarball=fiji-nojre.zip
-wget "http://jenkins.imagej.net/job/Stable-Fiji/lastSuccessfulBuild/artifact/${fiji_tarball}" \
-  || die "fiji download failed"
-unzip $fiji_tarball
-rm $fiji_tarball
+if test ! -d Fiji.app; then
+  echo "downloading fiji..."
+  fiji_tarball=fiji-nojre.zip
+  wget "http://jenkins.imagej.net/job/Stable-Fiji/lastSuccessfulBuild/artifact/${fiji_tarball}" \
+    || die "fiji download failed"
+  unzip $fiji_tarball
+  rm $fiji_tarball
+fi
 
 echo "downloading the nifti io plugin..."
 cd Fiji.app/plugins
