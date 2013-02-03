@@ -17,6 +17,16 @@ VirtualBox Virtual Machine
 #. Go to the *Vagrant* directory of this repository (``cd Vagrant``)
 #. Run ``vagrant up``
 
+Debian Squeeze in the Cloud
+---------------------------
+
+1. ``aptitude install git python-pip python-dev build-essential swig libssl-dev``
+#. ``pip install salt``
+#. ``git clone https://github.com/InsightSoftwareConsortium/ITKDevelopmentEnvironment``
+#. ``mkdir -p /srv && cd /srv``
+#. ``ln -s ~/ITKDevelopmentEnvironment/Salt/salt``
+#. ``salt-call --local state.highstate``
+
 .. _VirtualBox: https://www.virtualbox.org/
 .. _Vagrant: http://www.vagrantup.com/
 .. _Salty Vagrant: https://github.com/saltstack/salty-vagrant
