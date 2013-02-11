@@ -15,7 +15,7 @@ SimpleITK_build:
     - name: http://itk.org/SimpleITK.git
     - target: /home/itk/src/SimpleITK
     - submodule: True
-    - rev: v0.6rc1
+    - rev: v0.6rc2
     - runas: itk
     - require:
       - pkg: build_packages
