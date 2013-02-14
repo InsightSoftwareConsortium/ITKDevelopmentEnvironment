@@ -6,5 +6,6 @@ build_packages:
       - g++
       - git
       - libqt4-dev
+      - make
       - ncurses-dev
       - subversion
