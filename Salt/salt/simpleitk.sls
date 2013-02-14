@@ -7,8 +7,6 @@ SimpleITK_packages:
   pkg.installed:
     - names:
       - python-dev
-      - libpcre3-dev
-      - swig2.0
 
 SimpleITK_build:
   git.latest:
