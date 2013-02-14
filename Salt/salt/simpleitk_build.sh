@@ -7,6 +7,6 @@ cmake -DCMAKE_BUILD_TYPE:STRING=Release \
   -DWRAP_PYTHON:BOOL=ON \
   -DWRAP_RUBY:BOOL=OFF \
   -DUSE_SYSTEM_ITK:BOOL=ON \
-  /home/itk/src/SimpleITK/Superbuild > /dev/null
+  /home/itk/src/SimpleITK/SuperBuild > /dev/null
 echo "Building SimpleITK"
 make -j2 > /dev/null
