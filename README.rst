@@ -20,8 +20,8 @@ VirtualBox Virtual Machine
 Debian Squeeze in the Cloud
 ---------------------------
 
-1. ``aptitude install git python-pip python-dev build-essential swig libssl-dev``
-#. ``pip install salt``
+1. ``wget -O - http://bootstrap.saltstack.org | sudo sh``
+#. ``aptitude install git``
 #. ``git clone https://github.com/InsightSoftwareConsortium/ITKDevelopmentEnvironment``
 #. ``mkdir -p /srv && cd /srv``
 #. ``ln -s ~/ITKDevelopmentEnvironment/Salt/salt``
