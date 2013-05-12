@@ -51,3 +51,17 @@ VTK_install:
     - user: root
     - watch:
       - cmd: VTK_build
+
+  file.managed:
+    - name: /etc/ld.so.conf.d/99vtk.conf
+    - source: salt://99vtk.conf
+    - user: root
+    - group: root
+    - mode: 644
+    - makedirs: True
+
+  cmd.wait:
+    - name: /sbin/ldconfig
+    - user: root
+    - require:
+      - file: /etc/ld.so.conf.d/99vtk.conf
