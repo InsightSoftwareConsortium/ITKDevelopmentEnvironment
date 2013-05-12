@@ -8,7 +8,7 @@ ITK_build:
   git.latest:
     - name: http://itk.org/ITK.git
     - target: /home/itk/src/ITK
-    - rev: v4.3.1
+    - rev: v4.3.2
     - runas: itk
     - require:
       - pkg: build_packages
