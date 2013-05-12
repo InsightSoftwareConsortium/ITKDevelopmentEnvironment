@@ -1,19 +1,21 @@
-Vagrant::Config.run do |config|
+Vagrant.configure("2") do |config|
   ## Chose your base box
-  config.vm.box = "DebianSqueeze32"
+  config.vm.box = "DebianWheezy32"
 
   ## Modify the box
   ## Options here from VBoxManage
   # The SimpleITK build needs a lot of memory, but the machine
   # can be trimmed down after that.
-  config.vm.customize ["modifyvm", :id, "--memory", 2048]
-  config.vm.customize ["modifyvm", :id, "--cpus", 2]
-  # Required for more than one CPU.
-  config.vm.customize ["modifyvm", :id, "--ioapic", "on"]
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", 2048]
+    vb.customize ["modifyvm", :id, "--cpus", 2]
+    # Required for more than one CPU.
+    vb.customize ["modifyvm", :id, "--ioapic", "on"]
+  end
 
   ## For masterless, mount your salt file root
   salt_file_root = File.expand_path(File.join(File.dirname(__FILE__), '..', 'Salt'))
-  config.vm.share_folder "salt_file_root", "/srv", salt_file_root 
+  config.vm.synced_folder salt_file_root, "/srv"
 
 
   ## Use all the defaults:
