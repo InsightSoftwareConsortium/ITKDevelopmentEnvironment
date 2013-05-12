@@ -12,7 +12,7 @@ VirtualBox Virtual Machine
 
 1. Install VirtualBox_
 #. Install Vagrant_
-#. Install `Salty Vagrant`_  (``vagrant gem install vagrant-salt``)
+#. Install `Salty Vagrant`_  (``vagrant plugin install vagrant-salt``)
 #. Download a base linux box from `VagrantBox.es`_ (``vagrant box add DebianSqueeze32 http://mathie-vagrant-boxes.s3.amazonaws.com/debian_squeeze_32.box``)
 #. Go to the *Vagrant* directory of this repository (``cd Vagrant``)
 #. Run ``vagrant up``
