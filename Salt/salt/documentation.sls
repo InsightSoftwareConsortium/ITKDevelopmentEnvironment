@@ -15,7 +15,7 @@ Documentation_packages_removed:
 
 SimpleITK_Notebooks:
   git.latest:
-    - name: https://github.com/InsightSoftwareConsortium/SimpleITK-Notebooks.git 
+    - name: https://github.com/InsightSoftwareConsortium/SimpleITK-Notebooks.git
     - target: /home/itk/src/SimpleITK-Notebooks
     - rev: master
     - runas: itk
