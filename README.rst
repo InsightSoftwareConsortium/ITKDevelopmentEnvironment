@@ -13,14 +13,14 @@ VirtualBox Virtual Machine
 1. Install VirtualBox_
 #. Install Vagrant_
 #. Install `Salty Vagrant`_  (``vagrant plugin install vagrant-salt``)
-#. Download a base linux box from `VagrantBox.es`_ (``vagrant box add DebianSqueeze32 http://mathie-vagrant-boxes.s3.amazonaws.com/debian_squeeze_32.box``)
+#. Download a base linux box from the `ITK Midas Community`_ or `VagrantBox.es`_ (``vagrant box add DebianWheezy32 http://midas3.kitware.com/midas/download/bitstream/324020/wheezy32.box``)
 #. Go to the *Vagrant* directory of this repository (``cd Vagrant``)
 #. Run ``vagrant up``
 
-Debian Squeeze in the Cloud
+Debian Wheezy in the Cloud
 ---------------------------
 
-1. ``wget -O - http://bootstrap.saltstack.org | sudo sh``
+1. `Install salt`_.
 #. ``aptitude install git``
 #. ``git clone https://github.com/InsightSoftwareConsortium/ITKDevelopmentEnvironment``
 #. ``mkdir -p /srv && cd /srv``
@@ -31,3 +31,5 @@ Debian Squeeze in the Cloud
 .. _Vagrant: http://www.vagrantup.com/
 .. _Salty Vagrant: https://github.com/saltstack/salty-vagrant
 .. _VagrantBox.es: http://www.vagrantbox.es/
+.. _Install salt: http://docs.saltstack.com/topics/installation/debian.html
+.. _ITK Midas Community: http://midas3.kitware.com/midas/community/12
