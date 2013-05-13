@@ -7,13 +7,15 @@ SimpleITK_packages:
   pkg.installed:
     - names:
       - python-dev
+      - swig2.0
+      - libpcre3
 
 SimpleITK_build:
   git.latest:
     - name: http://itk.org/SimpleITK.git
     - target: /home/itk/src/SimpleITK
     - submodule: True
-    - rev: v0.6.1
+    - rev: master
     - runas: itk
     - require:
       - pkg: build_packages
