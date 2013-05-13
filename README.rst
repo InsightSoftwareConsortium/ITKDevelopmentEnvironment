@@ -13,7 +13,7 @@ VirtualBox Virtual Machine
 1. Install VirtualBox_
 #. Install Vagrant_
 #. Install `Salty Vagrant`_  (``vagrant plugin install vagrant-salt``)
-#. Download a base linux box from the `ITK Midas Community`_ or `VagrantBox.es`_ (``vagrant box add DebianWheezy32 http://midas3.kitware.com/midas/download/bitstream/324020/wheezy32.box``)
+#. Download a base linux box from the `ITK Midas Community`_ or `VagrantBox.es`_ (``vagrant box add DebianWheezy32 http://midas3.kitware.com/midas/download/bitstream/324026/wheezy32.box``)
 #. Go to the *Vagrant* directory of this repository (``cd Vagrant``)
 #. Run ``vagrant up``
 
