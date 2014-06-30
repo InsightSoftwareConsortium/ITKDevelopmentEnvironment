@@ -7,6 +7,17 @@ These scripts will download and build ITK and SimpleITK to create an ITK
 development on your local box, in a local virtual machine, or on a
 virtual machine in the cloud.
 
+Docker
+------
+
+Docker_ is a light-weight, high performance, low resource alternative to the
+Vagrant/Salt solutions below.
+
+1. Install Docker_
+# ``cd Docker``
+# ``docker build -t itk``
+# ``docker run -i -t itk``
+
 VirtualBox Virtual Machine
 --------------------------
 
@@ -27,6 +38,7 @@ Debian Wheezy in the Cloud
 #. ``ln -s ~/ITKDevelopmentEnvironment/Salt/salt``
 #. ``salt-call --local state.highstate``
 
+.. _Docker: http://docker.io
 .. _VirtualBox: https://www.virtualbox.org/
 .. _Vagrant: http://www.vagrantup.com/
 .. _Salty Vagrant: https://github.com/saltstack/salty-vagrant
