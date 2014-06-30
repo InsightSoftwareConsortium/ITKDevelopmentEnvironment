@@ -15,7 +15,7 @@ Vagrant/Salt solutions below.
 
 1. Install Docker_
 # ``cd Docker``
-# ``docker build -t itk``
+# ``docker build -t itk .``
 # ``docker run -i -t itk``
 
 VirtualBox Virtual Machine
