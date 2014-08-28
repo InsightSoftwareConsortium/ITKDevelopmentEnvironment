@@ -1,6 +1,6 @@
 FROM debian
 MAINTAINER Matt McCormick <matt.mccormick@kitware.com>
-# The base build tools, utilities, and normal user for ITK development.
+# The base build with tools, utilities, and normal user for ITK development.
 
 # Update
 RUN apt-get update
