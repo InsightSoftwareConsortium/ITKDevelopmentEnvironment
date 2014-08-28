@@ -5,4 +5,4 @@ MAINTAINER Matt McCormick <matt.mccormick@kitware.com>
 WORKDIR /home/itk
 RUN mkdir src
 VOLUME ["/home/itk/src"]
-RUN git clone http://itk.org/ITK.git src/ITK
+CMD git clone http://itk.org/ITK.git src/ITK
