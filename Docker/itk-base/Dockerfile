@@ -20,4 +20,6 @@ RUN echo 'itk:itk' | chpasswd
 ENV HOME /home/itk
 USER itk
 WORKDIR /home/itk
+RUN mkdir /home/itk/src
+RUN mkdir /home/itk/bin
 CMD ["/bin/bash"]
