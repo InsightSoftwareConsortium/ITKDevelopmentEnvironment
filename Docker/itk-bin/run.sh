@@ -1,10 +1,12 @@
 #!/bin/sh
 
 cd ../itk-src
+./build.sh
 ./run.sh
 cd -
 
 cd ../itk-data
+./build.sh
 ./run.sh
 cd -
 
