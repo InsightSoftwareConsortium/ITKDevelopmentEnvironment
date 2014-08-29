@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker run -d --name itk-data itk-data
+docker run --name itk-data itk-data

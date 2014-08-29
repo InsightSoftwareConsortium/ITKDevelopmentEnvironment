@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker run -d --name itk-src itk-src
+docker run --name itk-src itk-src
