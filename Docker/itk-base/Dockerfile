@@ -6,8 +6,20 @@ RUN apt-get update
 
 # Build tools
 RUN apt-get install -y build-essential
-RUN apt-get install -y cmake-curses-gui
 RUN apt-get install -y git
+
+RUN apt-get install -y libncurses-dev
+WORKDIR /tmp/
+RUN git clone -b release http://cmake.org/cmake.git
+RUN mkdir /tmp/cmake-build
+WORKDIR /tmp/cmake-build
+RUN ../cmake/bootstrap
+RUN make -j4
+RUN ./bin/cmake -DCMAKE_BUILD_TYPE:STRING=Release .
+RUN make
+RUN make install
+WORKDIR /tmp/
+RUN rm -rf cmake*
 
 # Utilities
 RUN apt-get install -y vim
