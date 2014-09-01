@@ -8,6 +8,7 @@ cmake \
   \ #-DITKV3_COMPATIBILITY:BOOL=ON \
   -DBUILD_TESTING:BOOL=ON \
   -DITK_USE_BRAINWEB_DATA:BOOL=ON \
+  -DModule_ITKReview:BOOL=ON \
   -DExternalData_OBJECT_STORES:STRING=/home/itk/data/MD5 \
     /home/itk/src/ITK
 make -j$(nproc)
