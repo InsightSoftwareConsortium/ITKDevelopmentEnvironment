@@ -5,9 +5,15 @@ cd ../itksoftwareguide-src
 ./run.sh
 cd -
 
-cd ../itk-bin
+cd ../itk-bin-testing
 ./build.sh
 ./run.sh
 cd -
 
-docker run --volumes-from itksoftwareguide-src --volumes-from itk-bin --volumes-from itk-data --name itksoftwareguide-bin itksoftwareguide-bin
+docker run \
+  -it \
+ --volumes-from itksoftwareguide-src \
+ --volumes-from itk-bin-testing \
+ --volumes-from itk-data \
+ --name itksoftwareguide-bin \
+ itksoftwareguide-bin bash
