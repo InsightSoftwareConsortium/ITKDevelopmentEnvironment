@@ -14,5 +14,5 @@ docker run \
  --volumes-from itksoftwareguide-src \
  --volumes-from itk-bin-testing \
  --volumes-from itk-data \
- --name itksoftwareguide-bin \
- itksoftwareguide-bin
+ --name itksoftwareguide-dashboard \
+ itksoftwareguide-dashboard
