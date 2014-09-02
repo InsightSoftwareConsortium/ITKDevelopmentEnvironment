@@ -13,6 +13,8 @@ RUN apt-get install -y python
 RUN apt-get install -y ghostscript
 RUN apt-get install -y imagemagick
 RUN apt-get install -y python-pygments
+RUN apt-get install -y latex-xcolor
+RUN apt-get install -y texlive-fonts-recommended
 
 USER itk
 
