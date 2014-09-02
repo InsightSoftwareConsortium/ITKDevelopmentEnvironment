@@ -11,8 +11,8 @@ cd ../itk-bin-testing
 cd -
 
 docker run \
+ --rm \
  --volumes-from itksoftwareguide-src \
  --volumes-from itk-bin-testing \
  --volumes-from itk-data \
- --name itksoftwareguide-dashboard \
  itksoftwareguide-dashboard
