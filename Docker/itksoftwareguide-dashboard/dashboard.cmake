@@ -10,7 +10,7 @@ set( CTEST_BUILD_NAME "Linux GCC Software Guide" )
 set( CTEST_BUILD_CONFIGURATION MinSizeRel )
 set( CTEST_CMAKE_GENERATOR "Unix Makefiles" )
 
-set( CTEST_DASHBOARD_ROOT "$ENV{HOME}" )
+set( CTEST_DASHBOARD_ROOT "/home/itk" )
 set( CTEST_SOURCE_DIRECTORY ${CTEST_DASHBOARD_ROOT}/src/ITKSoftwareGuide )
 set( CTEST_BINARY_DIRECTORY ${CTEST_DASHBOARD_ROOT}/bin/ITKSoftwareGuide )
 set( CTEST_CONFIGURATION_TYPE ${CTEST_BUILD_CONFIGURATION} )
@@ -28,19 +28,19 @@ set( CTEST_DROP_LOCATION "/submit.php?project=Insight" )
 set( CTEST_DROP_SITE_CDASH TRUE )
 list( APPEND CTEST_NOTES_FILES "${CTEST_SCRIPT_DIRECTORY}/${CTEST_SCRIPT_NAME}" )
 
+# Start with a fresh build tree.
+ctest_empty_binary_directory( ${CTEST_BINARY_DIRECTORY} )
+
 # Initial cache.
 file( WRITE ${CTEST_BINARY_DIRECTORY}/CMakeCache.txt "
 SITE:STRING=${CTEST_SITE}
 BUILDNAME:STRING=${CTEST_BUILD_NAME}
 ITKSoftwareGuide_SUPERBUILD:BOOL=OFF
-ITK_SOURCE_DIR:PATH=$ENV{HOME}/src/ITK
-ITK_BINARY_DIR:PATH=$ENV{HOME}/bin/ITK
-ITK_DIR:PATH=$ENV{HOME}/bin/ITK
-ITK_EXECUTABLES_DIR:PATH=$ENV{HOME}/bin/ITK/bin
+ITK_SOURCE_DIR:PATH=/home/itk/src/ITK
+ITK_BINARY_DIR:PATH=/home/itk/bin/ITK
+ITK_DIR:PATH=/home/itk/bin/ITK
+ITK_EXECUTABLES_DIR:PATH=/home/itk/bin/ITK/bin
 " )
-
-# Start with a fresh build tree.
-ctest_empty_binary_directory( ${CTEST_BINARY_DIRECTORY} )
 
 ctest_start( Nightly )
 ctest_update()
