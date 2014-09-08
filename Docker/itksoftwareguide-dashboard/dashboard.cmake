@@ -5,7 +5,7 @@
 #############################
 
 # Build identification.
-set( CTEST_SITE "ENV${HOSTNAME}.docker" )
+set( CTEST_SITE "$ENV{HOSTNAME}.docker" )
 set( CTEST_BUILD_NAME "Linux GCC Software Guide" )
 set( CTEST_BUILD_CONFIGURATION MinSizeRel )
 set( CTEST_CMAKE_GENERATOR "Unix Makefiles" )
@@ -29,7 +29,7 @@ set( CTEST_DROP_SITE_CDASH TRUE )
 list( APPEND CTEST_NOTES_FILES "${CTEST_SCRIPT_DIRECTORY}/${CTEST_SCRIPT_NAME}" )
 
 # Start with a fresh build tree.
-ctest_empty_binary_directory( ${CTEST_BINARY_DIRECTORY} )
+ctest_empty_binary_directory( ${CTEST_BINARY_DIRECTORY}/ )
 
 # Initial cache.
 file( WRITE ${CTEST_BINARY_DIRECTORY}/CMakeCache.txt "
