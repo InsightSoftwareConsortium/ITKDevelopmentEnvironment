@@ -12,7 +12,7 @@ if test ! -e CMakeCache.txt; then
     -DITK_EXECUTABLES_DIR:PATH=/home/itk/bin/ITK/bin \
       /home/itk/src/ITKSoftwareGuide
 fi
-make
+make &
 
 cd /home/itk/bin
 /usr/local/bin/node \
