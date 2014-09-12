@@ -1,0 +1,3 @@
+itksoftwareguide-src
+itk-bin-testing
+itk-data
