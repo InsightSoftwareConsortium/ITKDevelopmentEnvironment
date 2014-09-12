@@ -32,7 +32,9 @@ done
 if docker ps -a | awk '{print $NF}' | grep -q ^${name}$; then
   echo "Have ${name}, restarting..."
   docker start ${name} > /dev/null
-  echo "Exit code: $(docker wait ${name})"
+  docker logs -f ${name} &
+  exit_code=$(docker wait ${name})
+  echo "Exit code: $exit_code"
 else
   echo "Running new container, ${name}..."
   for dep in $volume_deps; do
