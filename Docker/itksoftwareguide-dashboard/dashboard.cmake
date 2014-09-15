@@ -2,6 +2,8 @@
 # Maintainer: Matt McCormick
 # m a t t . m c c o r m i c k
 # @ k i t w a r e . c o m
+#
+# See https://github.com/InsightSoftwareConsortium/ITKDevelopmentEnvironment
 #############################
 
 # Build identification.
