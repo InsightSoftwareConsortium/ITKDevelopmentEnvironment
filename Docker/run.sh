@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
 # Use this script to run the docker image in a container
 
-function usage {
+usage() {
 cat << EOF
 $0 image-name
 

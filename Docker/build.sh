@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
 # Use this script to build the docker image.
 
-function usage {
+usage() {
 cat << EOF
 $0 image-name [--pull]
 
