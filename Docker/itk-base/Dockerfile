@@ -1,29 +1,26 @@
-FROM debian
+FROM debian:jessie
 MAINTAINER Matt McCormick <matt.mccormick@kitware.com>
 
-# Update
-RUN apt-get update
+RUN apt-get update && apt-get install -y \
+  build-essential \
+  curl \
+  git \
+  libncurses-dev \
+  vim
 
-# Build tools
-RUN apt-get install -y build-essential
-RUN apt-get install -y git
-
-RUN apt-get install -y libncurses-dev
+# Install the latest CMake release
 WORKDIR /tmp/
-RUN git clone -b release http://cmake.org/cmake.git
-RUN mkdir /tmp/cmake-build
-WORKDIR /tmp/cmake-build
-RUN ../cmake/bootstrap
-RUN make -j4
-RUN ./bin/cmake -DCMAKE_BUILD_TYPE:STRING=Release .
-RUN make
-RUN make install
-WORKDIR /tmp/
-RUN rm -rf cmake*
-
-# Utilities
-RUN apt-get install -y vim
-RUN apt-get install -y tmux
+RUN curl -O http://www.cmake.org/files/v3.2/cmake-3.2.2.tar.gz && \
+    tar xvzf cmake-3.2.2.tar.gz && \
+    mkdir /tmp/cmake-build && \
+    cd /tmp/cmake-build && \
+    ../cmake-3.2.2/bootstrap && \
+    make -j$(nproc) && \
+    ./bin/cmake -DCMAKE_BUILD_TYPE:STRING=Release . && \
+    make -j$(nproc) && \
+    make install && \
+    cd /tmp && \
+    rm -rf cmake*
 
 # Normal user
 RUN useradd -m itk
