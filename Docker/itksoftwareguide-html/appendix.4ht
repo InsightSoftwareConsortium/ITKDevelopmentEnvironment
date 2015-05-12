@@ -1,0 +1,16 @@
+\def\@blockelement#1{% for handling paragraphs in block level elements
+    \ifvmode\IgnorePar\fi\EndP\HCode{#1}
+}
+\renewcommand{\@chap@pppage}{%
+    \chapter*{\appendixpagename}
+}
+
+\renewcommand{\@sec@pppage}{%
+    \section*{\appendixpagename}
+    \nobreak
+    \@afterheading
+}
+
+\ConfigureEnv{appendices}{\@blockelement{<div class="appendices">}}{\@blockelement{</div>}}{}{}
+\ifdefined\theHchapter\else\newcommand\theHchapter{\Alph{chapter}}\fi
+\ifdefined\theHsection\else\newcommand\theHsection{\Alph{section}}\fi
