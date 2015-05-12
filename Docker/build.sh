@@ -15,14 +15,14 @@ Example
 EOF
 }
 
-if test $# -lt 1 -o "$1" == "-h" -o "$1" == "--help"; then
+if test $# -lt 1 -o "$1" = "-h" -o "$1" = "--help"; then
   usage
   exit
 fi
 
 image=$1
 pull=false
-if test "$2" == "--pull"; then
+if test "$2" = "--pull"; then
   pull=true
 fi
 

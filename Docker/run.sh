@@ -15,7 +15,7 @@ Example
 EOF
 }
 
-if test $# -lt 1 -o "$1" == "-h" -o "$1" == "--help"; then
+if test $# -lt 1 -o "$1" = "-h" -o "$1" = "--help"; then
   usage
   exit
 fi
