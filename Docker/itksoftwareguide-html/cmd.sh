@@ -13,5 +13,7 @@ if test ! -e CMakeCache.txt; then
     -DGENERATE_HTML:BOOL=ON \
     -DDRAFT_WATERMARK:BOOL=OFF \
       /home/itk/src/ITKSoftwareGuide
+else
+  cmake .
 fi
 make

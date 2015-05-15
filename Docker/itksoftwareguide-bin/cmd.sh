@@ -11,5 +11,7 @@ if test ! -e CMakeCache.txt; then
     -DITK_DIR:PATH=/home/itk/bin/ITK \
     -DITK_EXECUTABLES_DIR:PATH=/home/itk/bin/ITK/bin \
       /home/itk/src/ITKSoftwareGuide
+else
+  cmake .
 fi
 make
