@@ -10,11 +10,11 @@ RUN apt-get update && apt-get install -y \
 
 # Install the latest CMake release
 WORKDIR /tmp/
-RUN curl -O http://www.cmake.org/files/v3.2/cmake-3.2.2.tar.gz && \
-    tar xvzf cmake-3.2.2.tar.gz && \
+RUN curl -O https://cmake.org/files/v3.4/cmake-3.4.3.tar.gz && \
+    tar xvzf cmake-3.4.3.tar.gz && \
     mkdir /tmp/cmake-build && \
     cd /tmp/cmake-build && \
-    ../cmake-3.2.2/bootstrap && \
+    ../cmake-3.4.3/bootstrap && \
     make -j$(nproc) && \
     ./bin/cmake -DCMAKE_BUILD_TYPE:STRING=Release . && \
     make -j$(nproc) && \
