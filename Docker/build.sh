@@ -32,4 +32,4 @@ if $pull; then
   docker pull $from
 fi
 
-docker build -t $image $image
+docker build -t insighttoolkit/$image $image

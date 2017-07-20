@@ -2,25 +2,18 @@ FROM debian:jessie
 MAINTAINER Matt McCormick <matt.mccormick@kitware.com>
 
 RUN apt-get update && apt-get install -y \
+  apt-utils \
   build-essential \
   curl \
   git \
-  libncurses-dev \
+  python \
   vim
 
 # Install the latest CMake release
 WORKDIR /tmp/
-RUN curl -O https://cmake.org/files/v3.4/cmake-3.4.3.tar.gz && \
-    tar xvzf cmake-3.4.3.tar.gz && \
-    mkdir /tmp/cmake-build && \
-    cd /tmp/cmake-build && \
-    ../cmake-3.4.3/bootstrap && \
-    make -j$(nproc) && \
-    ./bin/cmake -DCMAKE_BUILD_TYPE:STRING=Release . && \
-    make -j$(nproc) && \
-    make install && \
-    cd /tmp && \
-    rm -rf cmake*
+RUN curl  -L https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+    python get-pip.py && \
+    pip install cmake 
 
 # Normal user
 RUN useradd -m itk

@@ -4,7 +4,7 @@
 
 usage() {
 cat << EOF
-$0 image-name
+$0 image-name [volumes_to_manually_mount]
 
 Will run the docker image <image-name> in a container. If the container was
 already run, it will restart it.
@@ -22,6 +22,7 @@ fi
 
 
 name=$1
+shift
 
 volume_deps=$(cat ${name}/volume_deps.txt 2>/dev/null)
 for dep in $volume_deps; do
@@ -30,6 +31,10 @@ for dep in $volume_deps; do
 done
 
 if docker ps -a | awk '{print $NF}' | grep -q ^${name}$; then
+  if test $# -gt 0; then
+    echo "Docker container already exists, cannot mount new volumes. Remove exiting container first."
+    exit
+  fi
   echo "Have ${name}, restarting..."
   docker start ${name} > /dev/null
   docker logs -f ${name} &
@@ -40,5 +45,5 @@ else
   for dep in $volume_deps; do
     volumes_from="$volumes_from --volumes-from $dep "
   done
-  docker run -P $volumes_from --name ${name} ${name}
+  docker run -P $volumes_from --name ${name} "$@" insighttoolkit/${name}
 fi
