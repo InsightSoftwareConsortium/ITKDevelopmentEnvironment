@@ -13,10 +13,22 @@ Docker
 Docker_ is a light-weight, high performance, low resource alternative to the
 Vagrant/Salt solutions below.
 
-1. Install Docker_
-# ``cd Docker``
-# ``docker build -t itk .``
-# ``docker run -i -t itk``
+1. Install git and clone the `ITKDevelopmentEnvironment` project:
+
+::
+
+  git clone https://github.com/InsightSoftwareConsortium/ITKDevelopmentEnvironment
+
+2. Install Docker_
+3. Build and run the `itk` docker image:
+
+::
+
+  cd Docker
+  docker build -t itk .
+  docker run -i -t itk
+ 
+ 
 
 VirtualBox Virtual Machine
 --------------------------
@@ -31,12 +43,21 @@ VirtualBox Virtual Machine
 Debian Wheezy in the Cloud
 ---------------------------
 
-1. `Install salt`_.
-#. ``aptitude install git``
-#. ``git clone https://github.com/InsightSoftwareConsortium/ITKDevelopmentEnvironment``
-#. ``mkdir -p /srv && cd /srv``
-#. ``ln -s ~/ITKDevelopmentEnvironment/Salt/salt``
-#. ``salt-call --local state.highstate``
+1. Install git and clone the `ITKDevelopmentEnvironment` project:
+
+::
+
+  aptitude install git
+  git clone https://github.com/InsightSoftwareConsortium/ITKDevelopmentEnvironment
+
+2. `Install salt`_.
+3. Run salt:
+
+::
+
+  mkdir -p /srv && cd /srv
+  ln -s ~/ITKDevelopmentEnvironment/Salt/salt
+  salt-call --local state.highstate
 
 .. _Docker: http://docker.io
 .. _VirtualBox: https://www.virtualbox.org/
