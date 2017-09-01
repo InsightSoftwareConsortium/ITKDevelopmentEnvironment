@@ -11,8 +11,10 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repos
     jpeg-dev \
     libpng-dev \
     ninja \
+    python3-dev \
     tiff-dev \
-    zlib-dev
+    zlib-dev \
+  && ln -s /usr/bin/python3 /usr/bin/python
 
 # ITK master 2017-08-28
 ENV ITK_VERSION ed702da240b4984ce61684bf078cab7bb8301acc
