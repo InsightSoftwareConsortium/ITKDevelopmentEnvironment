@@ -6,8 +6,8 @@ A repository of scripts to set up an ITK development environment
 These scripts will download and build an ITK
 development environment including both ITK and SimpleITK:
 
-* on your local box using Docker
-* in a local virtual machine using VirtualBox and Vagrant
+* on your local box using Docker, or;
+* in a local virtual machine using VirtualBox and Vagrant, or;
 * on a virtual machine in the cloud using salt
 
 Docker
