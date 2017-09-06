@@ -1,4 +1,4 @@
-This Docker image to provides the build environment for testing [ITK
+This Docker image provides the build environment for testing [ITK
 modules](https://itk.org/ITKSoftwareGuide/html/Book1/ITKSoftwareGuide-Book1ch9.html#x48-1460009)
 on GitHub with the [CircleCI](https://circleci.com) or other continuous
 integration (CI) service.
