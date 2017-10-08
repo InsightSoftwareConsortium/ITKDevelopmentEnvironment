@@ -1,7 +1,6 @@
-FROM insighttoolkit/itksoftwareguide-base
-MAINTAINER Matt McCormick <matt.mccormick@kitware.com>
+FROM insighttoolkit/itksoftwareguide-base as itksoftwareguide-src
 
-RUN mkdir /home/itk/src/ITKSoftwareGuide
-VOLUME ["/home/itk/src/ITKSoftwareGuide"]
-COPY cmd.sh /tmp/cmd.sh
-CMD /tmp/cmd.sh
+ENV ITKSoftwareGuide_VERSION 6ccb80ccf0d5805886782888b63e0d371625a021
+RUN git clone https://github.com/InsightSoftwareConsortium/ITKSoftwareGuide.git \
+  && cd ITKSoftwareGuide \
+  && git checkout ${ITKSoftwareGuide_VERSION}
