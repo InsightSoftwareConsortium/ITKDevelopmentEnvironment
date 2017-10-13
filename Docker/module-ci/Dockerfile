@@ -5,6 +5,7 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repos
   && apk update \
   && apk add \
     curl \
+    curl-dev \
     cmake \
     expat-dev \
     g++ \
