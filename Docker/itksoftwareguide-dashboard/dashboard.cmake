@@ -10,11 +10,11 @@
 set( CTEST_SITE "$ENV{HOSTNAME}.docker" )
 set( CTEST_BUILD_NAME "Linux GCC Software Guide" )
 set( CTEST_BUILD_CONFIGURATION MinSizeRel )
-set( CTEST_CMAKE_GENERATOR "Unix Makefiles" )
+set( CTEST_CMAKE_GENERATOR "Ninja" )
 
-set( CTEST_DASHBOARD_ROOT "/home/itk" )
-set( CTEST_SOURCE_DIRECTORY ${CTEST_DASHBOARD_ROOT}/src/ITKSoftwareGuide )
-set( CTEST_BINARY_DIRECTORY ${CTEST_DASHBOARD_ROOT}/bin/ITKSoftwareGuide )
+set( CTEST_DASHBOARD_ROOT "/" )
+set( CTEST_SOURCE_DIRECTORY ${CTEST_DASHBOARD_ROOT}/ITKSoftwareGuide )
+set( CTEST_BINARY_DIRECTORY ${CTEST_DASHBOARD_ROOT}/ITKSoftwareGuide-build )
 set( CTEST_CONFIGURATION_TYPE ${CTEST_BUILD_CONFIGURATION} )
 
 find_program(CTEST_GIT_COMMAND NAMES git git.cmd)
@@ -37,11 +37,7 @@ ctest_empty_binary_directory( ${CTEST_BINARY_DIRECTORY}/ )
 file( WRITE ${CTEST_BINARY_DIRECTORY}/CMakeCache.txt "
 SITE:STRING=${CTEST_SITE}
 BUILDNAME:STRING=${CTEST_BUILD_NAME}
-ITKSoftwareGuide_SUPERBUILD:BOOL=OFF
-ITK_SOURCE_DIR:PATH=/home/itk/src/ITK
-ITK_BINARY_DIR:PATH=/home/itk/bin/ITK
-ITK_DIR:PATH=/home/itk/bin/ITK
-ITK_EXECUTABLES_DIR:PATH=/home/itk/bin/ITK/bin
+ITK_GIT_TAG:STRING=nightly-master
 " )
 
 ctest_start( Nightly )
@@ -53,6 +49,6 @@ ctest_build( BUILD "${CTEST_BINARY_DIRECTORY}" APPEND )
 ctest_test( BUILD "${CTEST_BINARY_DIRECTORY}" )
 ctest_submit( PARTS Build Test )
 
-file( GLOB pdfs "${CTEST_BINARY_DIRECTORY}/SoftwareGuide/Latex/*.pdf" )
+file( GLOB pdfs "${CTEST_BINARY_DIRECTORY}/ITKSoftwareGuide-build/SoftwareGuide/Latex/*.pdf" )
 ctest_upload( FILES ${pdfs} )
 ctest_submit( PARTS Upload )
