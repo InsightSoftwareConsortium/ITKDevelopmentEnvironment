@@ -16,22 +16,11 @@ Docker
 Docker_ is a light-weight, high performance, low resource alternative to the
 Vagrant/Salt solutions below.
 
-1. Install git and clone the `ITKDevelopmentEnvironment` project:
-
-::
-
-  git clone https://github.com/InsightSoftwareConsortium/ITKDevelopmentEnvironment
-
-2. Install Docker_
-3. Build and run the `itk` docker image:
-
-::
-
-  cd Docker
-  docker build -t itk .
-  docker run -i -t itk
- 
- 
+Docker images are available for GitHub continuous integration testing of the
+[ITK Software
+Guide](https://github.com/InsightSoftwareConsortium/ITKSoftwareGuide) and [ITK
+Modules](https://github.com/InsightSoftwareConsortium/ITKModuleTemplate). For
+more information on how to use these image, see the provided links.
 
 VirtualBox Virtual Machine
 --------------------------
