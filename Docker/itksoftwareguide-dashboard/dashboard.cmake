@@ -8,7 +8,13 @@
 
 # Build identification.
 set(CTEST_SITE "$ENV{HOSTNAME}.docker")
-set(CTEST_BUILD_NAME "Linux GCC Software Guide")
+if("$ENV{CIRCLE_PROJECT_REPONAME}")
+  set(sha "$ENV{CIRCLE_SHA1}")
+  string(SUBSTRING "${sha}" 0 7 short_sha)
+  set(CTEST_BUILD_NAME "Software Guide CircleCI build $ENV{CIRCLE_BUILD_NUM} for ${short_sha}")
+else()
+  set(CTEST_BUILD_NAME "Linux GCC Software Guide")
+endif()
 set(CTEST_BUILD_CONFIGURATION MinSizeRel)
 set(CTEST_CMAKE_GENERATOR "Ninja")
 
@@ -41,7 +47,11 @@ BUILDNAME:STRING=${CTEST_BUILD_NAME}
 ITK_GIT_TAG:STRING=nightly-master
 ")
 
-ctest_start(Nightly)
+if("$ENV{CIRCLE_PROJECT_REPONAME}")
+  ctest_start(Experimental)
+else()
+  ctest_start(Nightly)
+endif()
 ctest_update()
 ctest_configure(BUILD "${CTEST_BINARY_DIRECTORY}" SOURCE "${CTEST_SOURCE_DIRECTORY}")
 ctest_submit(PARTS Update Notes Configure)
