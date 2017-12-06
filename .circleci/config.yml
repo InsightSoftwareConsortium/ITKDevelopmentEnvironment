@@ -1,0 +1,242 @@
+build-settings: &build-settings
+  docker:
+    - image: docker:17.11.0-ce-git
+  working_directory: ~/ITKDevelopmentEnvironment/Docker
+  resource_class: xlarge
+
+version: 2
+jobs:
+  module-ci:
+    <<: *build-settings
+    steps:
+      - checkout:
+         path: ~/ITKDevelopmentEnvironment
+      - setup_remote_docker
+      - run:
+         name: module-ci build
+         command: |
+           ./build.sh module-ci
+           mkdir -p ~/docker
+           docker save -o ~/docker/module-ci.tar insighttoolkit/module-ci:latest
+      - save_cache:
+          key: module-ci-assets-{{ .Revision }}
+          paths:
+            - ~/docker/module-ci.tar
+  itksoftwareguide-base:
+    <<: *build-settings
+    steps:
+      - checkout:
+         path: ~/ITKDevelopmentEnvironment
+      - setup_remote_docker
+      - run:
+         name: itksoftwareguide-base build
+         command: |
+           ./build.sh itksoftwareguide-base
+           mkdir -p ~/docker
+           docker save -o ~/docker/itksoftwareguide-base.tar insighttoolkit/itksoftwareguide-base:latest
+      - save_cache:
+          key: itksoftwareguide-base-assets-{{ .Revision }}
+          paths:
+            - ~/docker/itksoftwareguide-base.tar
+            - ~/ITKDevelopmentEnvironment
+  itksoftwareguide-src:
+    <<: *build-settings
+    steps:
+      - restore_cache:
+          key: itksoftwareguide-base-assets-{{ .Revision }}
+      - setup_remote_docker
+      - run:
+         name: itksoftwareguide-src build
+         command: |
+           docker load -i ~/docker/itksoftwareguide-base.tar
+           ./build.sh itksoftwareguide-src
+           mkdir -p ~/docker
+           docker save -o ~/docker/itksoftwareguide-src.tar insighttoolkit/itksoftwareguide-src:latest
+      - save_cache:
+          key: itksoftwareguide-src-assets-{{ .Revision }}
+          paths:
+            - ~/docker/itksoftwareguide-src.tar
+  itksoftwareguide-itk:
+    <<: *build-settings
+    steps:
+      - setup_remote_docker
+      - restore_cache:
+          key: itksoftwareguide-base-assets-{{ .Revision }}
+      - restore_cache:
+          key: itksoftwareguide-src-assets-{{ .Revision }}
+      - run:
+         name: itksoftwareguide-itk build
+         no_output_timeout: 2.0h
+         command: |
+           docker load -i ~/docker/itksoftwareguide-src.tar
+           ./build.sh itksoftwareguide-itk
+           mkdir -p ~/docker
+           docker save -o ~/docker/itksoftwareguide-itk.tar insighttoolkit/itksoftwareguide-itk:latest
+      - save_cache:
+          key: itksoftwareguide-itk-assets-{{ .Revision }}
+          paths:
+            - ~/docker/itksoftwareguide-itk.tar
+  itksoftwareguide-bin:
+    <<: *build-settings
+    steps:
+      - setup_remote_docker
+      - restore_cache:
+          key: itksoftwareguide-base-assets-{{ .Revision }}
+      - restore_cache:
+          key: itksoftwareguide-itk-assets-{{ .Revision }}
+      - run:
+         name: itksoftwareguide-bin build
+         no_output_timeout: 1.5h
+         command: |
+           docker load -i ~/docker/itksoftwareguide-itk.tar
+           ./build.sh itksoftwareguide-bin
+           mkdir -p ~/docker
+           docker save -o ~/docker/itksoftwareguide-bin.tar insighttoolkit/itksoftwareguide-bin:latest
+      - save_cache:
+          key: itksoftwareguide-bin-assets-{{ .Revision }}
+          paths:
+            - ~/docker/itksoftwareguide-bin.tar
+  itksoftwareguide-dashboard:
+    <<: *build-settings
+    steps:
+      - setup_remote_docker
+      - restore_cache:
+          key: itksoftwareguide-base-assets-{{ .Revision }}
+      - restore_cache:
+          key: itksoftwareguide-src-assets-{{ .Revision }}
+      - run:
+         name: itksoftwareguide-dashboard build
+         no_output_timeout: 1.5h
+         command: |
+           docker load -i ~/docker/itksoftwareguide-src.tar
+           ./build.sh itksoftwareguide-dashboard
+           mkdir -p ~/docker
+           docker save -o ~/docker/itksoftwareguide-dashboard.tar insighttoolkit/itksoftwareguide-dashboard:latest
+      - save_cache:
+          key: itksoftwareguide-dashboard-assets-{{ .Revision }}
+          paths:
+            - ~/docker/itksoftwareguide-dashboard.tar
+  itksoftwareguide-edit:
+    <<: *build-settings
+    steps:
+      - setup_remote_docker
+      - restore_cache:
+          key: itksoftwareguide-base-assets-{{ .Revision }}
+      - restore_cache:
+          key: itksoftwareguide-bin-assets-{{ .Revision }}
+      - run:
+         name: itksoftwareguide-edit build
+         no_output_timeout: 1.5h
+         command: |
+           docker load -i ~/docker/itksoftwareguide-bin.tar
+           ./build.sh itksoftwareguide-edit
+           mkdir -p ~/docker
+           docker save -o ~/docker/itksoftwareguide-edit.tar insighttoolkit/itksoftwareguide-edit:latest
+      - save_cache:
+          key: itksoftwareguide-edit-assets-{{ .Revision }}
+          paths:
+            - ~/docker/itksoftwareguide-edit.tar
+  deploy:
+    <<: *build-settings
+    steps:
+      - restore_cache:
+          key: module-ci-assets-{{ .Revision }}
+      - deploy:
+          name: Deploy module-ci
+          command: |
+            docker load -i ~/docker/module-ci.tar
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker push insighttoolkit/module-ci:latest
+            fi
+      - restore_cache:
+          key: itksoftwareguide-base-assets-{{ .Revision }}
+      - deploy:
+          name: Deploy itksoftwareguide-base
+          command: |
+            docker load -i ~/docker/itksoftwareguide-base.tar
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker push insighttoolkit/itksoftwareguide-base:latest
+            fi
+      - restore_cache:
+          key: itksoftwareguide-src-assets-{{ .Revision }}
+      - deploy:
+          name: Deploy itksoftwareguide-src
+          command: |
+            docker load -i ~/docker/itksoftwareguide-src.tar
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker push insighttoolkit/itksoftwareguide-src:latest
+            fi
+      - restore_cache:
+          key: itksoftwareguide-itk-assets-{{ .Revision }}
+      - deploy:
+          name: Deploy itksoftwareguide-itk
+          command: |
+            docker load -i ~/docker/itksoftwareguide-itk.tar
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker push insighttoolkit/itksoftwareguide-itk:latest
+            fi
+      - restore_cache:
+          key: itksoftwareguide-bin-assets-{{ .Revision }}
+      - deploy:
+          name: Deploy itksoftwareguide-bin
+          command: |
+            docker load -i ~/docker/itksoftwareguide-bin.tar
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker push insighttoolkit/itksoftwareguide-bin:latest
+            fi
+      - restore_cache:
+          key: itksoftwareguide-dashboard-assets-{{ .Revision }}
+      - deploy:
+          name: Deploy itksoftwareguide-dashboard
+          command: |
+            docker load -i ~/docker/itksoftwareguide-dashboard.tar
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker push insighttoolkit/itksoftwareguide-dashboard:latest
+            fi
+      - restore_cache:
+          key: itksoftwareguide-edit-assets-{{ .Revision }}
+      - deploy:
+          name: Deploy itksoftwareguide-edit
+          command: |
+            docker load -i ~/docker/itksoftwareguide-edit.tar
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker push insighttoolkit/itksoftwareguide-edit:latest
+            fi
+
+workflows:
+    version: 2
+    build-deploy:
+      jobs:
+        - module-ci
+        - itksoftwareguide-base
+        - itksoftwareguide-src:
+            requires:
+              - itksoftwareguide-base
+        - itksoftwareguide-itk:
+            requires:
+              - itksoftwareguide-src
+        - itksoftwareguide-bin:
+            requires:
+              - itksoftwareguide-itk
+        - itksoftwareguide-dashboard:
+            requires:
+              - itksoftwareguide-src
+        - itksoftwareguide-edit:
+            requires:
+              - itksoftwareguide-bin
+        - deploy:
+            requires:
+              - module-ci
+              - itksoftwareguide-base
+              - itksoftwareguide-src
+              - itksoftwareguide-itk
+              - itksoftwareguide-bin
+              - itksoftwareguide-dashboard
+              - itksoftwareguide-edit
