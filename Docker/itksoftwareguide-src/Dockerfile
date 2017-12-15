@@ -1,6 +1,6 @@
 FROM insighttoolkit/itksoftwareguide-base as itksoftwareguide-src
 
-ENV ITKSoftwareGuide_VERSION bc26bf29db2fba1f0cdec316d8ce301b06eec2c8
+ENV ITKSoftwareGuide_VERSION c6d312d61b7fdf39dbf5e2afd48c9cead994c53d
 RUN git clone https://github.com/InsightSoftwareConsortium/ITKSoftwareGuide.git \
   && cd ITKSoftwareGuide \
   && git checkout ${ITKSoftwareGuide_VERSION}
