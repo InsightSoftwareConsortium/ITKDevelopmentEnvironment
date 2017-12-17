@@ -27,9 +27,7 @@ find_program(CTEST_GIT_COMMAND NAMES git git.cmd)
 if(NOT DEFINED CTEST_GIT_COMMAND)
   message(FATAL_ERROR "No Git Found.")
 endif()
-if("$ENV{CIRCLE_PROJECT_REPONAME}")
-  set(CTEST_GIT_UPDATE_CUSTOM "${CTEST_GIT_COMMAND}" "reset" "--hard" "HEAD")
-endif()
+set(CTEST_GIT_UPDATE_CUSTOM "${CTEST_GIT_COMMAND}" "reset" "--hard" "HEAD")
 
 # Upload information
 set(CTEST_NIGHTLY_START_TIME "01:00:00 UTC")
