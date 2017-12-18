@@ -8,7 +8,12 @@
 
 # Build identification.
 set(CTEST_SITE "$ENV{HOSTNAME}.docker")
-if("$ENV{CIRCLE_PROJECT_REPONAME}")
+if(NOT "$ENV{CIRCLE_PROJECT_REPONAME}" STREQUAL "")
+  set(in_circleci 1)
+else()
+  set(in_circleci 0)
+endif()
+if(in_circleci)
   set(sha "$ENV{CIRCLE_SHA1}")
   string(SUBSTRING "${sha}" 0 7 short_sha)
   set(CTEST_BUILD_NAME "Software Guide CircleCI build $ENV{CIRCLE_BUILD_NUM} for ${short_sha}")
@@ -50,7 +55,7 @@ CMAKE_JOB_POOL_COMPILE:STRING=compile
 CMAKE_JOB_POOL_LINK:STRING=link
 ")
 
-if("$ENV{CIRCLE_PROJECT_REPONAME}")
+if(in_circleci)
   ctest_start(Experimental)
 else()
   ctest_start(Nightly)
