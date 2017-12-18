@@ -42,8 +42,10 @@ set(CTEST_DROP_LOCATION "/submit.php?project=Insight")
 set(CTEST_DROP_SITE_CDASH TRUE)
 list(APPEND CTEST_NOTES_FILES "${CTEST_SCRIPT_DIRECTORY}/${CTEST_SCRIPT_NAME}")
 
-# Start with a fresh build tree.
-ctest_empty_binary_directory(${CTEST_BINARY_DIRECTORY}/)
+if(NOT in_circleci)
+  # Start with a fresh build tree.
+  ctest_empty_binary_directory(${CTEST_BINARY_DIRECTORY}/)
+endif()
 
 # Initial cache.
 file(WRITE ${CTEST_BINARY_DIRECTORY}/CMakeCache.txt "
