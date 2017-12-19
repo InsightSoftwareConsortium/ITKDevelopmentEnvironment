@@ -63,13 +63,29 @@ else()
   ctest_start(Nightly)
 endif()
 ctest_update()
-ctest_configure(BUILD "${CTEST_BINARY_DIRECTORY}" SOURCE "${CTEST_SOURCE_DIRECTORY}")
+ctest_configure(BUILD "${CTEST_BINARY_DIRECTORY}"
+  SOURCE "${CTEST_SOURCE_DIRECTORY}"
+  RETURN_VALUE configure_return)
 ctest_submit(PARTS Update Notes Configure)
 
-ctest_build(BUILD "${CTEST_BINARY_DIRECTORY}" APPEND)
-ctest_test(BUILD "${CTEST_BINARY_DIRECTORY}")
-ctest_submit(PARTS Build Test)
+ctest_build(BUILD "${CTEST_BINARY_DIRECTORY}" APPEND
+  RETURN_VALUE build_return
+  NUMBER_ERRORS build_errors
+  NUMBER_WARNINGS build_warnings)
+# We currently do not have any tests.
+#ctest_test(BUILD "${CTEST_BINARY_DIRECTORY}"
+  #RETURN_VALUE test_return)
+#ctest_submit(PARTS Build Test)
+ctest_submit(PARTS Build)
 
 file(GLOB pdfs "${CTEST_BINARY_DIRECTORY}/ITKSoftwareGuide-build/SoftwareGuide/Latex/*.pdf")
 ctest_upload(FILES ${pdfs})
 ctest_submit(PARTS Upload)
+
+if(NOT ${configure_return} EQUAL 0 OR
+   NOT ${build_return} EQUAL 0 OR
+   NOT ${build_errors} EQUAL 0 OR
+   NOT ${build_warnings} EQUAL 0)
+ message(FATAL_ERROR
+   "Build did not complete without warnings, errors, or failures.")
+endif()
