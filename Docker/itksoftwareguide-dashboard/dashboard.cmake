@@ -45,16 +45,25 @@ list(APPEND CTEST_NOTES_FILES "${CTEST_SCRIPT_DIRECTORY}/${CTEST_SCRIPT_NAME}")
 if(NOT in_circleci)
   # Start with a fresh build tree.
   ctest_empty_binary_directory(${CTEST_BINARY_DIRECTORY}/)
+  set(initial_cache "
+ITK_GIT_TAG:STRING=nightly-master
+")
+else()
+  set(initial_cache "
+CMAKE_JOB_POOLS:STRING=compile=10;link=2
+CMAKE_JOB_POOL_COMPILE:STRING=compile
+CMAKE_JOB_POOL_LINK:STRING=link
+CMAKE_C_COMPILER_LAUNCHER:STRING=/usr/bin/ccache
+CMAKE_CXX_COMPILER_LAUNCHER:STRING=/usr/bin/ccache
+")
 endif()
+
 
 # Initial cache.
 file(WRITE ${CTEST_BINARY_DIRECTORY}/CMakeCache.txt "
 SITE:STRING=${CTEST_SITE}
 BUILDNAME:STRING=${CTEST_BUILD_NAME}
-ITK_GIT_TAG:STRING=nightly-master
-CMAKE_JOB_POOLS:STRING=compile=10;link=2
-CMAKE_JOB_POOL_COMPILE:STRING=compile
-CMAKE_JOB_POOL_LINK:STRING=link
+${initial_cache}
 ")
 
 if(in_circleci)
