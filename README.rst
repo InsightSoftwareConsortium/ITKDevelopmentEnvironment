@@ -3,6 +3,9 @@ ITK Development Environment
 A repository of scripts to set up an ITK development environment
 ----------------------------------------------------------------
 
+.. image:: https://circleci.com/gh/InsightSoftwareConsortium/ITKDevelopmentEnvironment.svg?style=svg
+    :target: https://circleci.com/gh/InsightSoftwareConsortium/ITKDevelopmentEnvironment
+
 These scripts will download and build an ITK
 development environment including both ITK and SimpleITK:
 
