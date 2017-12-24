@@ -18,8 +18,8 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repos
     zlib-dev \
   && ln -s /usr/bin/python3 /usr/bin/python
 
-# ITK master 2017-08-28
-ENV ITK_VERSION ed702da240b4984ce61684bf078cab7bb8301acc
+# ITK master 2017-12-21
+ENV ITK_VERSION v4.13.0
 RUN git clone https://github.com/InsightSoftwareConsortium/ITK.git \
   && cd ITK \
   && git checkout ${ITK_VERSION} \
