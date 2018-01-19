@@ -1,4 +1,4 @@
-FROM docker:17.06.1-ce-git
+FROM docker:18.01.0-ce-git
 MAINTAINER Matt McCormick <matt.mccormick@kitware.com>
 
 RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
