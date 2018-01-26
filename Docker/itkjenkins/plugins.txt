@@ -1,0 +1,14 @@
+ec2
+config-file-provider
+description-column
+description-setter
+git-parameter
+nodelabelparameter
+ssh-slaves
+translation
+windows-slaves
+matrix-auth
+parameterized-trigger
+github
+github-oauth
+role-strategy
