@@ -17,9 +17,9 @@ Docker_ is a light-weight, high performance, low resource alternative to the
 Vagrant/Salt solutions below.
 
 Docker images are available for GitHub continuous integration testing of the
-[ITK Software
-Guide](https://github.com/InsightSoftwareConsortium/ITKSoftwareGuide) and [ITK
-Modules](https://github.com/InsightSoftwareConsortium/ITKModuleTemplate). For
+`ITK Software
+Guide <https://github.com/InsightSoftwareConsortium/ITKSoftwareGuide>`_ and `ITK
+Modules <https://github.com/InsightSoftwareConsortium/ITKModuleTemplate>`_. For
 more information on how to use these image, see the provided links.
 
 VirtualBox Virtual Machine
