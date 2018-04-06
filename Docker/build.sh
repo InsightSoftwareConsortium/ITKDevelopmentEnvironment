@@ -20,7 +20,10 @@ if test $# -lt 1 -o "$1" = "-h" -o "$1" = "--help"; then
   exit
 fi
 
+
 image=$1
+shift
+
 pull=false
 if test "$2" = "--pull"; then
   pull=true
@@ -32,4 +35,4 @@ if $pull; then
   docker pull $from
 fi
 
-docker build -t insighttoolkit/$image $image
+docker build "$@" -t insighttoolkit/$image $image
