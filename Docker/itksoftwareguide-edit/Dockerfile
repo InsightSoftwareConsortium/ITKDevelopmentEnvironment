@@ -5,7 +5,8 @@ MAINTAINER Matt McCormick <matt.mccormick@kitware.com>
 
 RUN apt-get update && apt-get install -y \
   bash-completion \
-  liquidprompt
+  liquidprompt \
+  sudo
 
 # Import Jupyter configuration and binaries
 
@@ -37,7 +38,8 @@ COPY --from=jupyter /usr/local/bin/start-singleuser.sh  /usr/local/bin/
 COPY --from=jupyter /etc/jupyter/jupyter_notebook_config.py /etc/jupyter/
 RUN fix-permissions /etc/jupyter/
 RUN fix-permissions /ITKSoftwareGuide
-RUN fix-permissions /ITKSoftwareGuide-build
+RUN fix-permissions /ITKSoftwareGuide-build && \
+  chown -R $NB_USER:$NB_GID /ITKSoftwareGuide-build
 
 RUN /usr/bin/liquidprompt_activate
 
