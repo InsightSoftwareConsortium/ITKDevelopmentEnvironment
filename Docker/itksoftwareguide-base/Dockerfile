@@ -1,4 +1,4 @@
-FROM debian:stretch as itksoftwareguide-base
+FROM ubuntu:16.04 as itksoftwareguide-base
 MAINTAINER Matt McCormick <matt.mccormick@kitware.com>
 
 RUN apt-get update && apt-get install -y \
@@ -46,6 +46,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   texlive-latex-base \
   texlive-latex-extra
 RUN apt-get update && apt-get install -y \
+  dvipng \
   ghostscript \
   locales \
   imagemagick \
