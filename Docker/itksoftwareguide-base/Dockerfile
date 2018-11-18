@@ -24,7 +24,7 @@ WORKDIR /usr/src
 RUN apt-get install -y libncurses-dev libssl-dev && \
   git clone https://github.com/Kitware/CMake.git CMake && \
   cd CMake && \
-  git checkout e841ae823edc3021aaa5b297be715344a9bca47e && \
+  git checkout v3.10.2 && \
   mkdir /usr/src/CMake-build && \
   cd /usr/src/CMake-build && \
   /usr/src/CMake/bootstrap \
